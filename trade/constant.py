@@ -1,0 +1,8 @@
+# encoding=utf-8
+
+PERIOD_M1 = '001'
+PERIOD_M5 = '005'
+PERIOD_M15 = '015'
+PERIOD_M30 = '030'
+PERIOD_H1 = '060'
+PERIOD_D1 = '100'
