@@ -13,7 +13,7 @@ class Trade:
         self._secret_key = cf.get('config', 'secret_key')
         self.mock = cf.getboolean('config', 'mock')
         need_proxy = cf.getboolean('config', 'need_proxy')
-        proxy = cf.getboolean('config', 'proxy')
+        proxy = cf.get('config', 'proxy')
         if self.mock:
             self.client = MockClient(self._access_key, self._secret_key, need_proxy, proxy)
         else:
