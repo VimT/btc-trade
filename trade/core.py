@@ -7,13 +7,15 @@ from .structures import *
 
 
 class Trade:
-    def __init__(self, mock=True):
-        self._access_key = "47877bd7-ff597182-6e6c4ca2-d0fb1"
-        self._secret_key = "34890b00-b820b016-dc3cdafe-ba350"
-        if mock:
-            self.client = MockClient(self._access_key, self._secret_key, True)
+    def __init__(self):
+        from . import cf
+        self._access_key = cf.get('config', 'access_key')
+        self._secret_key = cf.get('config', 'secret_key')
+        self.mock = cf.getboolean('config', 'mock')
+        if self.mock:
+            self.client = MockClient(self._access_key, self._secret_key, cf.getboolean('config', 'proxy'))
         else:
-            self.client = Client(self._access_key, self._secret_key, True)
+            self.client = Client(self._access_key, self._secret_key, cf.getboolean('config', 'proxy'))
 
     def GetAccount(self):
         """返回交易所账户信息
