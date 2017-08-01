@@ -9,15 +9,13 @@ import requests
 
 
 class Client:
-    PROXY = {"http": "http://dev-proxy.oa.com:8080",
-             "https": "http://dev-proxy.oa.com:8080"}
-
-    def __init__(self, access_key, secret_key, need_proxy):
+    def __init__(self, access_key, secret_key, need_proxy, proxy):
         self._access_key = access_key
         self._secret_key = secret_key
         self.session = requests.session()
+        self.proxy = dict(http=proxy, https=proxy)
         if need_proxy:
-            self.session.proxies = self.PROXY
+            self.session.proxies = self.proxy
 
     def _signature(self, params):
         """生成签名"""

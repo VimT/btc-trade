@@ -3,8 +3,8 @@ from trade.client import Client
 
 
 class MockClient(Client):
-    def __init__(self, access_key, secret_key, need_proxy):
-        Client.__init__(self, access_key, secret_key, need_proxy)
+    def __init__(self, access_key, secret_key, need_proxy, proxy):
+        Client.__init__(self, access_key, secret_key, need_proxy, proxy)
         self.available_cny_display = 100
         self.available_btc_display = 0
 

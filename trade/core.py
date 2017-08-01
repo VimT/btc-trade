@@ -12,10 +12,12 @@ class Trade:
         self._access_key = cf.get('config', 'access_key')
         self._secret_key = cf.get('config', 'secret_key')
         self.mock = cf.getboolean('config', 'mock')
+        need_proxy = cf.getboolean('config', 'need_proxy')
+        proxy = cf.getboolean('config', 'proxy')
         if self.mock:
-            self.client = MockClient(self._access_key, self._secret_key, cf.getboolean('config', 'proxy'))
+            self.client = MockClient(self._access_key, self._secret_key, need_proxy, proxy)
         else:
-            self.client = Client(self._access_key, self._secret_key, cf.getboolean('config', 'proxy'))
+            self.client = Client(self._access_key, self._secret_key, need_proxy, proxy)
 
     def GetAccount(self):
         """返回交易所账户信息
