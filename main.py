@@ -1,3 +1,5 @@
+import argparse
+
 from trade import *
 
 buy_abs = -20
@@ -45,7 +47,6 @@ def main():
 
 
 if __name__ == '__main__':
-
     try:
         main()
     except KeyboardInterrupt as e:

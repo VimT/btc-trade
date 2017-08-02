@@ -6,6 +6,8 @@ import time
 import logging
 from datetime import datetime
 
+import sys
+
 logger_name = 'btc'
 logger = logging.getLogger(logger_name)
 logger.setLevel(logging.INFO)
@@ -16,7 +18,7 @@ formatter = logging.Formatter(fmt)
 
 # create file handler
 now = datetime.now()
-log_path = "./log/{}{}{}{}{}{}.log".format(now.year, now.month, now.day, now.hour, now.minute, now.second)
+log_path = "./log/{}-{}-{}_{}_{}_{}.log".format(now.year, now.month, now.day, now.hour, now.minute, sys.argv[1] if len(sys.argv) > 1 else '未命名')
 fh = logging.FileHandler(log_path)
 fh.setFormatter(formatter)
 
