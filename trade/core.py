@@ -1,7 +1,7 @@
 # encoding=utf-8
 from datetime import datetime
 
-from .MockClient import MockClient
+from .mock import MockClient
 from .client import Client
 from .structures import *
 
