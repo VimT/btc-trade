@@ -23,9 +23,7 @@ def main():
     Log(exchange.GetAccount())
     Log("this is test begin")
 
-    parts = []
-    for i in range(N):
-        parts[i] = Part(0, 0, 99999, 0, 0)
+    parts = [Part(0, 0, 99999, 0, 0) for _ in range(N)]
 
     has_buy = 0
     can_buy = True
