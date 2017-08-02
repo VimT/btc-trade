@@ -10,4 +10,5 @@ def MA(records, period):
 
 def MACD(records, short, long, period):
     a, b, c = talib.MACD(np.array([i.Close for i in records]), short, long, period)
-    return a.tolist(), b.tolist(), c.tolist()
+    c = 2 * c
+    return c.tolist(), a.tolist(), b.tolist()
