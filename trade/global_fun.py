@@ -4,8 +4,9 @@ import time
 
 # create logger
 import logging
+from datetime import datetime
 
-logger_name = "btc"
+logger_name = 'btc'
 logger = logging.getLogger(logger_name)
 logger.setLevel(logging.INFO)
 
@@ -14,7 +15,8 @@ fmt = "%(asctime)s: %(levelname)s: %(message)s"
 formatter = logging.Formatter(fmt)
 
 # create file handler
-log_path = "btc.log"
+now = datetime.now()
+log_path = "./log/{}{}{}{}{}{}.log".format(now.year, now.month, now.day, now.hour, now.minute, now.second)
 fh = logging.FileHandler(log_path)
 fh.setFormatter(formatter)
 
