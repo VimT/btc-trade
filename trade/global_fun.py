@@ -17,17 +17,20 @@ fmt = "%(asctime)s: %(levelname)s: %(message)s"
 formatter = logging.Formatter(fmt)
 
 # create file handler
-now = datetime.now()
-log_path = "./log/{}-{}-{}_{}_{}_{}.log".format(now.year, now.month, now.day, now.hour, now.minute, sys.argv[1] if len(sys.argv) > 1 else '未命名')
-fh = logging.FileHandler(log_path)
-fh.setFormatter(formatter)
+if len(sys.argv) > 1:
+    now = datetime.now()
+    log_path = "./log/{}-{}-{}_{}_{}_{}.log".format(now.year, now.month, now.day, now.hour, now.minute,
+                                                    sys.argv[1])
+    fh = logging.FileHandler(log_path)
+    fh.setFormatter(formatter)
+    logger.addHandler(fh)
 
 # create stream handler
 sh = logging.StreamHandler()
 sh.setFormatter(formatter)
 
 # add handler and formatter to logger
-logger.addHandler(fh)
+
 logger.addHandler(sh)
 
 

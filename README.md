@@ -1,6 +1,5 @@
 # 交易平台模块 接口文档
 
-
 ---
 
 [toc]
@@ -16,8 +15,26 @@
 - requests
 
 
-## 使用
+## 下载与使用
+```shell
+git clone https://gitlab.com/562593188/btc.git
+cd btc
+touch config.ini  # 创建配置文件
+python main.py
+```
 
+`config.ini`内容如下
+```ini
+[config]
+mock = True  # 是否使用模拟交易
+need_proxy = True  # 是否需要HTTP代理
+proxy =  # HTTP代理地址
+access_key =  # 火币access_key
+secret_key =  # 火币secret_key
+```
+
+
+python console使用：
 ```python
 from trade import *
 ```
