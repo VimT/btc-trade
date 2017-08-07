@@ -3,7 +3,7 @@
 import pymysql
 from pymysql.err import MySQLError
 
-db = pymysql.connect("localhost", "btc", "btc123", "btc")
+db = pymysql.connect("localhost", "btc", "btc123", "btc", 3307, charset='utf8')
 cursor = db.cursor()
 
 
@@ -58,13 +58,13 @@ def select_asset_self():
     return blnc_b, blnc_r
 
 
-def insert_to_db_trade(id, price, amnt, type):
-    sql = f"insert into history_trade(id,price,time,amount,type) values('{id}',{price},NULL,{amnt},{type})"
-    print(sql)
+def insert_to_db_trade(rid, price, order_amount, type, final_amount, fee):
+    sql = f"insert into history_trade(id,price,order_amount,type,final_amount,fee) values({rid},{price},{order_amount},'{type}',{final_amount},{fee})"
     try:
         cursor.execute(sql)
         db.commit()
     except MySQLError as e:
+        print(e)
         db.rollback()
 
 

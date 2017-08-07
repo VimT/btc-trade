@@ -24,3 +24,6 @@ class MockClient(Client):
         return dict(available_cny_display=self.available_cny_display,
                     available_btc_display=self.available_btc_display,
                     frozen_cny_display=0, frozen_btc_display=0)
+
+    def _save_record(self, rid):
+        pass

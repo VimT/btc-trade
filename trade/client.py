@@ -7,6 +7,9 @@ from time import time
 
 import requests
 
+from . import dao
+from .global_fun import Sleep
+
 
 class Client:
     def __init__(self, access_key, secret_key, need_proxy, proxy):
@@ -258,3 +261,28 @@ class Client:
         except Exception as e:
             print(e)
             return None
+
+    def _save_record(self, rid):
+        order = self.query_order(rid)
+        status = order['status']
+        d_status = {0: '未成交', 1: '部分成交', 2: '已完成', 3: '已取消', 4: '废弃（该状态已不再使用）', 5: '异常', 6: '部分成交已取消', 7: '队列中'}
+        d_type = ['限价买', '限价卖', '市价买', '市价卖']
+        count = 0
+        while 1:
+            if status == 2:
+                id = order['id']
+                type = d_type[order['type'] - 1]
+                order_amount = order['order_amount']
+                fee = order['fee']
+                price = order['processed_price']
+                final_amount = order['total']
+                dao.insert_to_db_trade(id, price, order_amount, type, final_amount, fee)
+                break
+            elif status == 1 or status == 7 or status == 0:
+                if count == 10:
+                    break
+                count += 1
+                Sleep(500)
+                order = self.query_order(rid)
+                status = order['status']
+

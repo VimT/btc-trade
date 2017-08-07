@@ -1,9 +1,9 @@
 # coding=utf-8
-from datetime import datetime
 import threading
+from datetime import datetime
 
-from .mock import MockClient
 from .client import Client
+from .mock import MockClient
 from .structures import *
 
 
@@ -62,12 +62,12 @@ class Trade:
         """
         if price == -1:
             response = self.client.market_price_buy(amount)
-            # TODO 返回的格式确定一下，包括之前的错误信息处理
         else:
             response = self.client.limit_price_buy(amount, price)
-            return response.get("id")
         if response.get('result') == 'success':
-            return response.get("id")
+            rid = response.get('id')
+            threading.Thread(target=self.client._save_record, name='save' + str(rid), args=(rid,)).start()
+            return rid
         else:
             raise Exception('交易失败：' + response)
 
@@ -83,14 +83,8 @@ class Trade:
         else:
             response = self.client.limit_price_sell(amount, price)
         if response.get('result') == 'success':
-            return response.get("id")
+            rid = response.get('id')
+            threading.Thread(target=self.client._save_record, name='save' + str(rid), args=(rid,)).start()
+            return rid
         else:
             raise Exception('交易失败：' + response)
-
-    def _save_record(self, rid):
-        orders = self.client.query_order(rid)
-        d_type = ['限价买', '限价卖', '市价买', '市价卖']
-        id = orders['id']
-        type = d_type[orders['type'] - 1]
-        time = orders['last_processed_time']
-        amount = orders['order_amount']
