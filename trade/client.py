@@ -7,7 +7,6 @@ from time import time
 
 import requests
 
-from . import dao
 from .global_fun import Sleep
 
 
@@ -263,6 +262,7 @@ class Client:
             return None
 
     def _save_record(self, rid):
+        from . import dao
         order = self.query_order(rid)
         status = order['status']
         d_status = {0: '未成交', 1: '部分成交', 2: '已完成', 3: '已取消', 4: '废弃（该状态已不再使用）', 5: '异常', 6: '部分成交已取消', 7: '队列中'}
