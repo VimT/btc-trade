@@ -3,7 +3,7 @@
 import pymysql
 from pymysql.err import MySQLError
 
-db = pymysql.connect("localhost", "btc", "btc123", "btc", 3307, charset='utf8')
+db = pymysql.connect("localhost", "btc", "btc123", "btc", charset='utf8')
 cursor = db.cursor()
 
 
