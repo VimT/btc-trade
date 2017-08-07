@@ -1,5 +1,6 @@
-# encoding=utf-8
+# coding=utf-8
 from datetime import datetime
+import threading
 
 from .mock import MockClient
 from .client import Client
@@ -25,8 +26,8 @@ class Trade:
         :return: 返回一个Account结构
         """
         response = self.client.query_account_info()
-        return Account(response['available_cny_display'], response['frozen_cny_display'],
-                       response['available_btc_display'], response['frozen_btc_display'])
+        return Account(float(response['available_cny_display']), float(response['frozen_cny_display']),
+                       float(response['available_btc_display']), float(response['frozen_btc_display']))
 
     def GetTicker(self):
         """获取当前市场行情
@@ -85,3 +86,11 @@ class Trade:
             return response.get("id")
         else:
             raise Exception('交易失败：' + response)
+
+    def _save_record(self, rid):
+        orders = self.client.query_order(rid)
+        d_type = ['限价买', '限价卖', '市价买', '市价卖']
+        id = orders['id']
+        type = d_type[orders['type'] - 1]
+        time = orders['last_processed_time']
+        amount = orders['order_amount']

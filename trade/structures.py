@@ -1,4 +1,4 @@
-# encoding=utf-8
+# coding=utf-8
 
 """
 几个会用到的数据结构

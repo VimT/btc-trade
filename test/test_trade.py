@@ -1,4 +1,4 @@
-# encoding=utf-8
+# coding=utf-8
 from unittest import TestCase
 
 from trade import Trade

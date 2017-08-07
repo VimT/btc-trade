@@ -1,4 +1,4 @@
-# encoding=utf-8
+# coding=utf-8
 
 PERIOD_M1 = '001'
 PERIOD_M5 = '005'

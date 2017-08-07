@@ -1,4 +1,4 @@
-# encoding=utf-8
+# coding=utf-8
 import hashlib
 import urllib.error
 import urllib.parse
