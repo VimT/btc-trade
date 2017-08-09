@@ -23,6 +23,7 @@ class MockClient(Client):
     def query_account_info(self):
         return dict(available_cny_display=self.available_cny_display,
                     available_btc_display=self.available_btc_display,
+                    net_asset=0,
                     frozen_cny_display=0, frozen_btc_display=0)
 
     def _save_record(self, rid):
