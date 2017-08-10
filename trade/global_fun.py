@@ -29,13 +29,13 @@ def init_logger():
     formatter = logging.Formatter(fmt)
 
     # create file handler
-    # if len(sys.argv) > -1:
-    now = datetime.now()
-    log_path = "./log/{}-{}-{}_{}_{}_{}.log".format(now.year, now.month, now.day, now.hour, now.minute,
-                                                    sys.argv[1])
-    fh = logging.FileHandler(log_path)
-    fh.setFormatter(formatter)
-    _logger.addHandler(fh)
+    if len(sys.argv) > 1:
+        now = datetime.now()
+        log_path = "./log/{}-{}-{}_{}_{}_{}.log".format(now.year, now.month, now.day, now.hour, now.minute,
+                                                        sys.argv[1])
+        fh = logging.FileHandler(log_path)
+        fh.setFormatter(formatter)
+        _logger.addHandler(fh)
 
     # create db handler
     dbh = LogDBHandler()
