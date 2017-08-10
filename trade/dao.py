@@ -85,3 +85,12 @@ def select_trade(num):
     except MySQLError as e:
         print("Error:unable to fetch data")
     return results
+
+
+def insert_log(message):
+    sql = "insert into log(log) values('%s')" % message
+    try:
+        cursor.execute(sql)
+        db.commit()
+    except MySQLError as e:
+        db.rollback()

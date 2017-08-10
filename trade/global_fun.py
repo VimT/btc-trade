@@ -8,30 +8,46 @@ from datetime import datetime
 
 import sys
 
-logger_name = 'btc'
-logger = logging.getLogger(logger_name)
-logger.setLevel(logging.INFO)
+_logger = None
 
-# create formatter
-fmt = "%(asctime)s: %(levelname)s: %(message)s"
-formatter = logging.Formatter(fmt)
 
-# create file handler
-if len(sys.argv) > 1:
+class LogDBHandler(logging.Handler):
+    def emit(self, record):
+        from .dao import insert_log
+        msg = self.format(record)
+        insert_log(msg)
+
+
+def init_logger():
+    logger_name = 'btc'
+    global _logger
+    _logger = logging.getLogger(logger_name)
+    _logger.setLevel(logging.INFO)
+
+    # create formatter
+    fmt = "%(asctime)s: %(levelname)s: %(message)s"
+    formatter = logging.Formatter(fmt)
+
+    # create file handler
+    # if len(sys.argv) > -1:
     now = datetime.now()
     log_path = "./log/{}-{}-{}_{}_{}_{}.log".format(now.year, now.month, now.day, now.hour, now.minute,
                                                     sys.argv[1])
     fh = logging.FileHandler(log_path)
     fh.setFormatter(formatter)
-    logger.addHandler(fh)
+    _logger.addHandler(fh)
 
-# create stream handler
-sh = logging.StreamHandler()
-sh.setFormatter(formatter)
+    # create db handler
+    dbh = LogDBHandler()
+    dbh.setFormatter(formatter)
+    _logger.addHandler(dbh)
 
-# add handler and formatter to logger
+    # create stream handler
+    sh = logging.StreamHandler()
+    sh.setFormatter(formatter)
 
-logger.addHandler(sh)
+    # add handler and formatter to _logger
+    _logger.addHandler(sh)
 
 
 def Log(msg):
@@ -40,7 +56,9 @@ def Log(msg):
     :param msg:
     :return:
     """
-    logger.info(msg)
+    if not _logger:
+        init_logger()
+    _logger.info(msg)
 
 
 def Sleep(t):
