@@ -6,7 +6,7 @@
 
 ## 说明
 使用火币的API
-为交易策略模块提供服务
+为交易策略模块、网站提供服务，使用数据方的接口
 
 ### 依赖
 
@@ -52,24 +52,25 @@ from trade import *
 
 有以下接口：
 ```python
-exchange.GetAccount()
-exchange.GetTicker()
-exchange.GetRecords(period)
-exchange.Buy(amount)
-exchange.Sell(amount)
+exchange.GetAccount()  # 获取交易所账户信息，返回一个Account类实例
+exchange.GetTicker()  # 获取当前市场行情，返回一个Ticker类实例
+exchange.GetRecords(period)  # K线历史，period为K线周期，默认返回300条K线记录
+exchange.Buy(amount, price=-1)  # 买操作
+exchange.Sell(amount, price=-1)  # 卖操作
 ```
 
 ### TA库
 TA库是一个市场分析工具，这里是对`ta-lib`库的一个封装
 ```python
-TA.MA(records, period)  # 移动平均线
-TA.MACD(records, short, long, period)  # 指数平滑异同平均线
+real = TA.MA(records, period)  # 移动平均线
+macdhist, macdsignal, macd = TA.MACD(records, short, long, period)  # 指数平滑异同平均线
+upperband, middleband, lowerband = BOLL(records, period, multiplier)  # 布林线
 ```
 
 ### 全局函数
 ```python
-Log(msg)  # 写日志
-Sleep(t)  # 休眠
+Log(msg)  # 记录日志，会打印到屏幕，存储到文件和数据库
+Sleep(millisecond)  # 休眠时间
 ```
 
 ### 全局变量
@@ -83,12 +84,57 @@ PERIOD_H1 = '060'
 PERIOD_D1 = '100'
 ```
 
+### 数据结构
+定义了几种数据接口，方便策略方使用。
+```python
+class Account:
+    def __init__(self, Balance, FrozenBalance, Stocks, FrozenStocks, NetAsset):
+        """账户信息，exchange.GetAccount()返回
+
+        :param Balance: 余额，人民币
+        :param FrozenBalance: 冻结的余额
+        :param Stocks: BTC数量
+        :param FrozenStocks: 冻结的BTC数量
+        """
+        ...
+```
+
+```python
+class Record:
+    def __init__(self, Time, Open, High, Low, Close, Volume):
+        """标准OHLC结构, 用来画K线和指标分析用，exchange.GetRecords(period)返回
+
+        :param Time: 毫秒的时间戳
+        :param Open: 开盘价
+        :param High: 最高价
+        :param Low: 最低价
+        :param Close: 收盘价
+        :param Volume: 交易量
+        """
+        ...
+```
+
+```python
+class Ticker:
+    def __init__(self, High, Low, Sell, Buy, Last, Volume):
+        """实时市场行情，exchange.GetTicker()返回
+
+        :param High: 最高价
+        :param Low: 最低价
+        :param Sell: 卖一价
+        :param Buy: 卖一价
+        :param Last: 最后成交价
+        :param Volume: 最近成交量
+        """
+        ...
+```
+
 ---
 
 
 
 ## exchange.client的接口
-之前说`Trade`类实际是对`Client`的包装，所以可以通过 `exchange.client` 调用实际API接口，client返回的都是实际接口的返回值
+之前说`Trade`类实际是对`Client`的包装，所以可以通过 `exchange.client` 调用实际API接口，client返回的都是实际接口的返回值。但一般不会直接使用他，一般是在做手动操作或者调试的时候才调用。
 
 ### 获取行情
 
@@ -178,7 +224,14 @@ exchange.client.limit_price_buy(amount, price)
 exchange.client.limit_price_sell(amount, price)
 ```
 
+## 模拟交易
+继承Client类，根据需要，重写
 
+    market_price_sell(amount)
+    market_price_buy(amount)
+    query_account_info()
+
+三个方法，即实现模拟交易，方便策略方测试策略。
 
 
 

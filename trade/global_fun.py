@@ -18,7 +18,7 @@ class LogDBHandler(logging.Handler):
         insert_log(msg)
 
 
-def init_logger():
+def _init_logger():
     logger_name = 'btc'
     global _logger
     _logger = logging.getLogger(logger_name)
@@ -57,7 +57,7 @@ def Log(msg):
     :return:
     """
     if not _logger:
-        init_logger()
+        _init_logger()
     _logger.info(msg)
 
 
