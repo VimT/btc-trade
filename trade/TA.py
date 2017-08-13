@@ -2,7 +2,6 @@
 
 import numpy as np
 import talib
-import pandas as pd
 
 
 def MA(records, period):
@@ -41,4 +40,3 @@ def KDJ(records, n=9, k_period=3, d_period=3):
         D[i] = (1 * K[i] + (d_period - 1) * D[i - 1]) / d_period
     J = 3 * K - 2 * D
     return K, D, J
-
