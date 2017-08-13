@@ -60,11 +60,12 @@ exchange.Sell(amount, price=-1)  # 卖操作
 ```
 
 ### TA库
-TA库是一个市场分析工具，这里是对`ta-lib`库的一个封装
+TA库是一个市场分析工具，这里对`ta-lib`库做了一些封装，另外实现了库中没有的指标函数。
 ```python
 real = TA.MA(records, period)  # 移动平均线
 macdhist, macdsignal, macd = TA.MACD(records, short, long, period)  # 指数平滑异同平均线
-upperband, middleband, lowerband = BOLL(records, period, multiplier)  # 布林线
+upperband, middleband, lowerband = TA.BOLL(records, period, multiplier)  # 布林线
+K, D, J = TA.KDJ(records, n=9, k_period=3, d_period=3)  # 随机指标
 ```
 
 ### 全局函数
@@ -134,7 +135,7 @@ class Ticker:
 
 
 ## exchange.client的接口
-之前说`Trade`类实际是对`Client`的包装，所以可以通过 `exchange.client` 调用实际API接口，client返回的都是实际接口的返回值。但一般不会直接使用他，一般是在做手动操作或者调试的时候才调用。
+之前说`Trade`类实际是对`Client`的包装，所以可以通过 `exchange.client` 调用实际API接口，client返回的都是实际接口的返回值。一般不会直接使用，一般是在做手动操作或者调试的时候才调用。
 
 ### 获取行情
 
