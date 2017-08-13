@@ -21,7 +21,7 @@ class Account:
         self.NetAsset = NetAsset
 
     def __str__(self):
-        return f"余额：{self.Balance}, 冻结的余额：{self.FrozenBalance}, BTC数量：{self.Stocks}，冻结的BTC数量：{self.FrozenBalance}"
+        return f"净资产：{self.NetAsset}，可用余额：{self.Balance}, 冻结的余额：{self.FrozenBalance}, BTC数量：{self.Stocks}，冻结的BTC数量：{self.FrozenBalance}"
 
     def __repr__(self):
         return "<Account %s>" % self
