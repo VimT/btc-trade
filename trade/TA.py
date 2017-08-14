@@ -10,9 +10,9 @@ def MA(records, period):
 
 
 def MACD(records, short, long, period):
-    a, b, c = talib.MACD(np.array([i.Close for i in records]), short, long, period)
-    c = 2 * c
-    return c.tolist(), a.tolist(), b.tolist()
+    dif, dea, macd = talib.MACD(np.array([i.Close for i in records]), short, long, period)
+    macd = 2 * macd
+    return dif, dea, macd
 
 
 def BOLL(records, period, multiplier):
