@@ -226,7 +226,7 @@ class Client:
             print(e)
             return None
 
-    def get_market_status(self):
+    def get_market_status(self, ltc=False):
         """实时行情数据接口
         https://github.com/huobiapi/API_Docs/wiki/REST-Candlestick-Chart
         http://api.huobi.com/staticmarket/ticker_btc_json.js
@@ -234,6 +234,8 @@ class Client:
         :return:
         """
         url = "http://api.huobi.com/staticmarket/ticker_btc_json.js"
+        if ltc:
+            url = "http://api.huobi.com/staticmarket/ticker_ltc_json.js"
         try:
             r = self.session.get(url)
             if r.status_code == 200:
@@ -285,4 +287,3 @@ class Client:
                 Sleep(500)
                 order = self.query_order(rid)
                 status = order['status']
-

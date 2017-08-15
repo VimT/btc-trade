@@ -26,9 +26,11 @@ class Trade:
         :return: 返回一个Account结构
         """
         response = self.client.query_account_info()
+        net_asset = float(response['net_asset'])
+        net_asset -= float(response['available_ltc_display']) * self.client.get_market_status(True)['ticker']['sell']
         return Account(float(response['available_cny_display']), float(response['frozen_cny_display']),
                        float(response['available_btc_display']), float(response['frozen_btc_display']),
-                       float(response['net_asset']))
+                       net_asset)
 
     def GetTicker(self):
         """获取当前市场行情
