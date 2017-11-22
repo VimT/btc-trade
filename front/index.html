@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="不会编程的firends小组的亏钱现场">
+    <meta name="author" content="1306末席前端">
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="lib/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>不会编程的friends的亏本直播</title>
+</head>
+<body>
+
+<div class="site-wrapper">
+    <div class="masthead clearfix">
+        <div class="inner">
+            <h2 class="masthead-brand">不会编程的friends的亏本直播</h2>
+        </div>
+    </div>
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div id="nonsense" class="inner cover">
+                <h1 class="cover-heading"><img src="qq.png" /></h1>
+                <p class="lead">总之随缘亏钱</p>
+                <p class="lead">
+                    <button id="begin_btn" class="btn btn-lg btn-default" onclick="begin()">进入</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="main_info" class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h3>当前资产</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-3 dash-item">
+            <p class="dash-item-hd">
+                账户余额
+            </p>
+            <div class="dash-item-bd">
+                <span id="balance_int" class="num-font">1</span>
+                <span id="balance_decimal" class="decimal">.02</span>
+                <span class="unit">元</span>
+            </div>
+        </div>
+        <div class="col-md-3 dash-item">
+            <p class="dash-item-hd">
+                账户余币
+            </p>
+            <div class="dash-item-bd">
+                <span id="bitcoin_int" class="num-font">3</span>
+                <span id="bitcoin_decimal" class="decimal">.00</span>
+                <span class="unit">个</span>
+            </div>
+        </div>
+        <div class="col-md-3 dash-item">
+            <p class="dash-item-hd">
+               净资产 
+            </p>
+            <div class="dash-item-bd">
+                <span id="netAsset_int" class="num-font">100</span>
+                <span id="netAsset_decimal" class="decimal">.02</span>
+                <span class="unit">元</span>
+            </div>
+        </div>
+        <div class="col-md-3 dash-item">
+            <p class="dash-item-hd">
+                当前收益
+            </p>
+            <div class="dash-item-bd">
+                <span id="profit_int" class="num-font">100</span>
+                <span id="profit_decimal" class="decimal">.02</span>
+                <span class="unit">元</span>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h3>行情</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12" style="height: 500px;width: 100%">
+            <div id="chart" class="center-block" style="height: 100%;width: 100%"></div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h3>流水</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="col-md-12">
+            <table id="serial_record" data-row-style="row_style">
+                <thead>
+                <tr>
+                    <th data-field="time" data-sortable="true">交易时间</th>
+                    <th data-field="type" data-sortable="true">交易类型</th>
+                    <th data-field="price" data-sortable="true">比特币价格(元)</th>
+                    <th data-field="order_amount" data-sortable="true">委托数量</th>
+                    <th data-field="final_amount" data-sortable="true">交易额(元)</th>
+                    <th data-field="fee" data-sortable="true">手续费(元)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>2014-01-01 00:21:23</td>
+                    <td>买入</td>
+                    <td>0.2</td>
+                    <td>200</td>
+                    <td>成功</td>
+                    <td>$1</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="lib/js/bootstrap.min.js"></script>
+<script src="lib/js/bootstrap-table.min.js"></script>
+<script src="lib/js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

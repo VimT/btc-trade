@@ -1,0 +1,170 @@
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+    color: #fff;
+}
+
+/* Custom default button */
+.btn-default,
+.btn-default:hover,
+.btn-default:focus {
+    color: #333;
+    text-shadow: none; /* Prevent inheritance from `body` */
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    display: table;
+    transition: 1s height;
+    width: 100%;
+    height: 100%; /* For at least Firefox */
+    -webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+    background-color: #333;
+}
+
+.site-wrapper-inner {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.cover-container {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Padding for spacing */
+.inner {
+    padding: 30px;
+}
+
+/*
+ * Header
+ */
+.masthead-brand {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#stop_btn {
+    display: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: right;
+}
+
+.masthead-brand {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+/*
+ * Cover
+ */
+
+.cover {
+    padding: 0 20px;
+}
+
+.cover .btn-lg {
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/*
+ * Footer
+ */
+
+/*
+ * Affix and center
+ */
+
+@media (min-width: 768px) {
+    /* Pull out the header and footer */
+    .masthead {
+        position: absolute;
+        top: 0;
+    }
+
+    /* Start the vertical centering */
+    .site-wrapper-inner {
+        vertical-align: middle;
+    }
+
+    /* Handle the widths */
+    .masthead,
+    .cover-container {
+        width: 100%; /* Must be percentage or pixels for horizontal alignment */
+    }
+}
+
+@media (min-width: 992px) {
+    .masthead {
+        width: 100%;
+    }
+    .cover-container {
+        width: 700px;
+    }
+}
+
+/*
+ * Main info
+ */
+
+#main_info {
+    display: none;
+}
+
+.dash-item {
+    height: 40%;
+}
+
+.dash-item-hd {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: #8f9297;
+    line-height: 1.1;
+}
+
+.dash-item-bd {
+    line-height: 1.2;
+    padding: 17px 0 24px;
+    color: #454a51;
+}
+
+.dash-item-bd .num-font {
+    font-size: 36px;
+}
+
+.decimal {
+    font-size: 16px;
+}
+
+.unit {
+    margin-left: 5px;
+}
